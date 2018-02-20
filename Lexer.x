@@ -37,7 +37,7 @@ tokens :-
 
 data Par = IntDivTok| DivTok deriving Show
 
-slash :: String -> Op
+slash :: String -> Par
 slash s = case s of
                   "/":"/":xs -> IntDivTok
                   "/":xs     -> DivTok
@@ -49,8 +49,7 @@ data Token =
   AddTok|
   ExpTok|
   SubTok|
-  DivTok|
-  IntDivTok|
+  ParTok Par|
   RealTok Double|
   RoundTok|
   ModTok|
@@ -62,8 +61,6 @@ data Token =
   MSTok|
   MRTok|
   deriving (Eq,Show)
-
-
 }
 
 
