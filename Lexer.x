@@ -61,6 +61,15 @@ data Token =
   MSTok|
   MRTok|
   deriving (Eq,Show)
+scanTokens :: String -> Maybe [Token]
+scanTokens str = go ('\n',[],str)
+  where go inp@(_,_bs,str) =
+          case alexScan inp 0 of
+                AlexEOF -> Just []
+                AlexError _ -> Nothing
+                AlexSkip  inp' len     -> go inp'
+                AlexToken inp' len act -> fmap ((act (take len str)):) (go inp')
+
 }
 
 
